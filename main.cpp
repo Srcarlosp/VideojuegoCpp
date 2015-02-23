@@ -1,19 +1,46 @@
-/*fase de prueba para un codigo de generacion de escenarios 2D aleatorios, evitando colisiones 
-entre objetos, sabiendo su tamaño. Version para una matriz de diez elementos. al final está 
-pensado generar las coordenadas de cada objeto de forma aleatoria, pero para provar fallos, se meten a mano ahora.
-Los objetos colocados en esta version son de 2x2 elementos.*/
-
 #include <stdio.h>
 #include <stdlib.h>
 
+class mundo
+{
+	public:
+		int matriz[72][72];
+		void iniciarMatriz(int matriz[][72]);
+		void pintarMatriz(int matriz[][72]);
+		void introducirObjeto(int matriz[][72]);	
+};
 
-
-void pobjeto(int matriz[][10]){
-		int x,y;
-	while(true)
+void mundo::iniciarMatriz(int matriz[][72]){
+		int x=72,y=72;
+		for(int i=0;i<x;i++)
 	{
-		int ref=0;
-	printf("Introduzca las coordenadas del objeto:");
+		for(int j=0;j<y;j++)
+		matriz[i][j]=0;
+		
+	}
+
+}
+void mundo::pintarMatriz(int matriz[][72])
+{
+		int x=72,y=72;
+		
+	for( int i=0;i<x;i++)
+	{
+		printf("\n");
+		for( int j=0;j<y;j++)
+		{
+			if (matriz[i][j] == 1)
+				printf("%c", 178);
+			else
+				printf("%c", 176);
+		}
+	}
+}
+void mundo::introducirObjeto(int matriz[][72])
+{
+	int x,y;
+	int ref=0;
+	printf("\nIntroduzca las coordenadas del objeto:");
 	scanf("%d",&x);
 	scanf("%d",&y);
 	for(int i=x;i<x+2;i++)
@@ -25,55 +52,35 @@ void pobjeto(int matriz[][10]){
 
 		}
 	}
-	if (ref!=0){
+	if (ref!=0)
+	{
 		printf("Posicion no valida");
 	}
-
-
 	else
 	{
-
-	for(int i=x;i<x+2;i++)
+		for(int i=x;i<x+2;i++)
 		{
-		for(int j=y;j<y+2;j++)
-			matriz[i][j]=1;
+			for(int j=y;j<y+2;j++)
+				matriz[i][j]=1;
 		}
-	for( int i=0;i<10;i++)
-	{
-		printf("\n");
-		for( int j=0;j<10;j++)
-			printf("%d",matriz[i][j]);
-	}
-	}
-
-
-	}
-}
- int main( ){
-	const int a=10,b=10;
-	
-	int i=0,j=0;
-	int matriz[10][10];
-	for( i=0;i<a;i++)
-	{
-		for( j=0;j<b;j++)
-		matriz[i][j]=0;
 		
 	}
-	for( i=0;i<a;i++)
-	{
-		printf("\n");
-		for( j=0;j<b;j++)
-		printf("%d",matriz[i][j]);
-	}
-	printf("\n");
-	pobjeto(matriz);
-	system("PAUSE");
+
+}
+void motorGrafico(){ //Iniciamos el entorno grÃ¡fico fuera del main
+	mundo m;
+	m.iniciarMatriz(m.matriz);
+	m.pintarMatriz(m.matriz);
+	m.introducirObjeto(m.matriz);
+	m.pintarMatriz(m.matriz);
+}
+
+ int main()
+{
+	while(1)
+		motorGrafico();
+	
 }
 
 
-
-
-
-
-
+ 
